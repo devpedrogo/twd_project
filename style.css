@@ -1,0 +1,564 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Stack+Sans+Notch:wght@200..700&display=swap');
+
+:root {
+    --color-dark: #0a0a0a;
+    --color-accent: #f5dd0b; 
+    --color-light: #f5f5f5;
+    --font-primary: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    overflow: hidden; /* CRUCIAL: Remove o scroll global no desktop */
+}
+
+/* ESTILO DOS FRAMES (SCREENS) */
+.screen {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Transição de Opacidade (Fade) */
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none; /* Desativa interação quando oculto */
+    z-index: 10;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto; /* Ativa interação quando visível */
+    z-index: 20; /* Garante que a tela ativa fique por cima */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay semi-transparente */
+    z-index: 1;
+}
+
+.dark-bg {
+    background-color: var(--color-dark);
+    opacity: 0.95; 
+}
+
+/* ----------------------------------- */
+/* ESTILOS DO FRAME 1: HERO */
+/* ----------------------------------- */
+
+#tela-hero {
+    /* Substitua pelo caminho da sua imagem real */
+    background-image: url('./imagens/twd_badasteam.jpeg'); 
+    background-size: cover; /* COBRE a tela, pode cortar */
+    background-position: top center;
+    position: relative;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.logo-twd {
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: #ccc;
+    margin-bottom: 60px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+}
+
+/* Estilo do Botão CTA (Explorar) */
+.cta-button {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    border: transparent 2px solid;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(220, 243, 14, 0.5);
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    border: #f5dd0b 2px solid;
+    transform: translateY(-2px);
+    color: #f5dd0b;
+}
+
+#marca{
+    position: absolute;
+    bottom: 0;
+    align-self: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bolder;
+    padding: 3px 3px;
+    border-radius: 1px;
+    z-index: 3;
+}
+#marca a{
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s ease;
+}
+#marca a:hover{
+    color:#f5dd0b;
+    cursor: pointer;
+}
+
+/* ----------------------------------- */
+/* ESTILOS DO FRAME 2: CARDS */
+/* ----------------------------------- */
+
+.cards-content {
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: var(--color-accent);
+}
+
+/* Carrossel */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.cards-wrapper {
+    display: flex;
+    overflow-x: hidden; /* CRUCIAL: Esconde cards fora da visão */
+    scroll-behavior: smooth;
+    width: 90%; /* Define a área visível dos cards */
+    padding: 20px 40px;
+}
+
+.card {
+    min-width: 250px; /* Largura mínima de cada card */
+    margin: 0 15px;
+    background-color: #1f1f1f;
+    border: 1px solid var(--color-accent);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex-shrink: 0; /* Impede que os cards diminuam */
+    background-image: var(--card-bg); /* Usa a URL injetada pelo JS */
+    background-size: cover;
+    background-position: center center;
+    height: 350px; /* Defina uma altura fixa para que a imagem apareça */
+    width: 30%;
+    position: relative; /* Necessário para posicionar o overlay */
+}
+
+.card:hover{
+    transform: translateY(-5px) scale(1.02);
+    transform: scale(1.05);
+    box-shadow: 0 0 5px 5px rgba(244, 248, 18, 0.7);
+    z-index: 10;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 60% preto */
+    transition: background-color 0.3s;
+    z-index: 1;
+    border-radius: 8px;
+}
+.card-content-wrapper {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    z-index: 2; /* Acima do overlay */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão para baixo */
+    padding: 20px 40px;
+}
+.card h3 {
+    color: var(--color-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.card-button {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.card-button:hover {
+    background-color: #aaa;
+}
+
+/* Botões de Navegação do Carrossel de cards*/
+.nav-button {
+    background: transparent;
+    color: var(--color-light);
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    opacity: 0.8;
+    border: #fcfbfb 1px solid;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    text-align: center;
+}
+.nav-button:hover{
+    color: #f5dd0b;
+    border: #f5dd0b 1px solid;
+}
+.nav-button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* ----------------------------------- */
+/* ESTILOS DO FRAME 3: DETALHES */
+/* ----------------------------------- */
+
+.detalhes-content {
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    height: 90vh; /* Ajuste para não tocar as bordas */
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px; /* Espaço para o botão de voltar */
+}
+
+.split-content {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+}
+
+.col-texto, .col-carrossel {
+    flex: 1; /* Divide o espaço igualmente */
+    padding: 20px;
+    /* background-color: rgba(25, 25, 25, 0.8); */
+    border-radius: 8px;
+}
+.col-carrossel{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 0;
+}
+.col-texto h2 {
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+/* Scroll interno para o texto */
+.text-scrollable {
+    max-height: 60vh; /* Altura máxima para o texto */
+    overflow-y: auto; /* Permite scroll vertical interno */
+    padding-right: 15px;
+    line-height: 1.6;
+}
+
+/* Estilo da barra de scroll (opcional) */
+.text-scrollable::-webkit-scrollbar { width: 8px; }
+.text-scrollable::-webkit-scrollbar-thumb { background-color: var(--color-accent); border-radius: 4px; }
+
+/* Carrossel de Imagens (simples) */
+.image-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative; 
+    padding: 0 40px; /* Espaço para as setas laterais */
+    width: 100%; /* Ocupa a largura total da coluna */
+    height: 100%;
+}
+
+/* O contêiner de imagens que será movido */
+.image-carousel {
+    max-height: 50vh; 
+    /* Desktop: Esconde o scroll */
+    overflow-x: hidden; 
+    overflow-y: hidden; 
+    white-space: nowrap; 
+    flex-grow: 1; 
+    scroll-behavior: smooth; /* Para o movimento suave via JS */
+    height: 100%;
+    padding: 20px 0; 
+    border-radius: 4px;
+}
+
+/* Ocultar barra de scroll (Desktop/Webkit) */
+.image-carousel::-webkit-scrollbar {
+    display: none; 
+    height: 0;
+}
+.image-carousel {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Estilo para as imagens dentro do carrossel */
+.image-carousel img {
+    display: inline-block; 
+    width: 100%; /* Define a largura de cada imagem */
+    height: auto;
+    margin-right: 10px; 
+    margin-bottom: 0;
+    object-fit: cover; 
+    border-radius: 4px;
+}
+
+/* Botões de Navegação (Setas) */
+.img-nav-button {
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--color-accent);
+    border: none;
+    font-size: 2rem;
+    font-weight: 100;
+    text-align: center;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 50%;
+}
+
+.img-nav-button:hover:not(:disabled) {
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+}
+
+.img-nav-button:disabled {
+    opacity: 0.3;
+    cursor: default;
+    background: none;
+}
+
+.img-nav-button.prev-img {
+    left: 0;
+}
+
+.img-nav-button.next-img {
+    right: 0;
+}
+
+/* Botão de Voltar Geral */
+.back-button {
+    position: absolute;
+    background: none;
+    border: 1px solid var(--color-light);
+    color: var(--color-light);
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    z-index: 30;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+/* Botão de Voltar da Tela de Cards */
+#btn-voltar-hero {
+    position: static;
+    margin-top: 20px;
+    display: inline-block;
+    transform: translateY(-100%);
+}
+
+/* style.css */
+
+/* Mantenha o body e html sem overflow: hidden para o mobile */
+@media (max-width: 768px) {
+    body, html {
+        /* Remove a restrição de scroll para permitir navegação vertical no mobile */
+        overflow-y: auto !important; 
+    }
+    
+    .screen {
+        /* Permite que as telas sejam empilhadas e tenham scroll no mobile */
+        height: auto; 
+        min-height: 100vh; /* Garante que ela ocupe pelo menos uma tela */
+        position: relative; /* Empilha as telas em vez de sobrepô-las */
+        opacity: 1; /* Mantenha todas visíveis para que o scroll funcione, 
+                      ou use JS para mostrar/esconder se preferir transições */
+        pointer-events: auto;
+    }
+    
+    .screen.hidden {
+        /* Se você ainda quiser usar a lógica JS para 'esconder', mantenha este estilo */
+        display: none; 
+    }
+    
+    /* Ajustes para o texto de entrada */
+    .logo-twd {
+        width: 300px;
+    }
+    .tagline {
+        font-size: 1rem;
+    }
+    .img-nav-button{
+        height: 30px;
+        width: 30px;
+        font-size: 1rem;
+    }
+    .image-carousel {
+        max-height: 100vh; 
+    }
+    .section-title{
+        font-size: 25px;
+    }
+    .card{
+        text-align: center;
+    }
+    .card h3{
+        font-size: 15px;
+    }
+    .card p{
+        font-size: 12px;
+    }
+    .card-button{
+        font-size: 9px;
+    }
+    .image-carousel img{
+        box-shadow: none;
+    }
+    .image-carousel{
+        width: 100%;
+        height: 100%;
+    }
+    #titulo-temporada{
+        font-size: 15px;
+    }
+    #texto-temporada{
+        font-size: 10px;
+    }
+}
+
+/* style.css */
+
+@media (max-width: 768px) {
+    .cards-content {
+        padding: 40px 15px; /* Adiciona padding nas laterais */
+    }
+
+    /* Oculta os botões laterais no mobile */
+    .nav-button {
+        display: none; 
+    }
+
+    .carousel-container {
+        /* No mobile, o contêiner não precisa mais das setas */
+        justify-content: flex-start;
+    }
+
+    .cards-wrapper {
+        /* Permite que o wrapper dos cards use a largura total */
+        width: 100%; 
+        /* Transforma o carrossel horizontal em scrollable horizontal no mobile, 
+           ou defina display: block se quiser lista vertical. */
+        overflow-x: auto; 
+        /* Se quiser uma lista vertical, use:
+        display: block; 
+        overflow-x: visible; 
+        */
+        padding: 30px 0;
+    }
+
+    .card {
+        min-width: 80%; /* Garante que o card ocupe a maior parte da tela */
+        margin: 0 10px 20px 10px; /* Margem entre os cards para deslizar */
+        /* Se quiser uma lista vertical, remova a propriedade flex-shrink: 0 */
+    }
+}
+
+/* style.css */
+
+@media (max-width: 768px) {
+    .detalhes-content {
+        height: auto;
+        padding-top: 70px; /* Espaço para o botão de voltar */
+    }
+
+    .split-content {
+        flex-direction: column; /* Empilha as colunas */
+        gap: 20px;
+    }
+
+    .col-texto, .col-carrossel {
+        padding: 15px;
+    }
+
+    .col-texto h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Remove a restrição de altura do texto para o scroll mobile */
+    .text-scrollable {
+        max-height: none; 
+        overflow-y: visible;
+        padding-right: 0;
+    }
+
+    .back-button.top-left {
+        /* Garante que o botão de voltar fique visível no mobile */
+        position: fixed; 
+        top: 10px;
+        left: 10px;
+    }
+}

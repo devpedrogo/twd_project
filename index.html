@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Walking Dead</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="tela-hero" class="screen active">
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+            <img src="./imagens/twd_logo.png" alt="Logo" class="logo-twd">
+            <h1 class="logo-twd"></h1>
+            <p class="tagline">WE ARE THE WALKING DEAD</p>
+            <button id="btn-explorar" class="cta-button">Explorar Temporadas</button>
+        </div>
+        <p id="marca">Developed by <a href="https://github.com/devpedrogo" target="_blank">@devpedrogo</a></p>
+    </div>
+
+    <div id="tela-cards" class="screen hidden">
+        <div class="overlay dark-bg"></div>
+        <div class="cards-content">
+            <h2 class="section-title">Explore as Temporadas</h2>
+            <div class="carousel-container">
+                <button class="nav-button prev-button" disabled>&#10094;</button>
+                <div id="cards-wrapper" class="cards-wrapper">
+                    </div>
+                <button class="nav-button next-button">&#10095;</button>
+            </div>
+            <button id="btn-voltar-hero" class="back-button">Voltar</button>
+        </div>
+    </div>
+
+    <div id="tela-detalhes" class="screen hidden">
+        <div class="overlay dark-bg"></div>
+        <div class="detalhes-content">
+            <button id="btn-voltar-cards" class="back-button top-left">&#10094</button>
+
+            <div class="split-content">
+                <div class="col-texto">
+                    <h2 id="titulo-temporada"></h2>
+                    <p id="texto-temporada" class="text-scrollable"></p>
+                </div>
+
+                <div class="col-carrossel">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
