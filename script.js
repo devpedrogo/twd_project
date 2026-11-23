@@ -299,6 +299,20 @@ btnVoltarHero.addEventListener('click', () => {
 prevButton.addEventListener('click', () => navegarCarrossel('prev'));
 nextButton.addEventListener('click', () => navegarCarrossel('next'));
 cardsWrapper.addEventListener('scroll', atualizarBotoesCarrossel); // Monitora o scroll manual
+window.addEventListener('resize', () => {
+    atualizarBotoesCarrossel();
+    atualizarBotoesImagens();
+});
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        if (telaDetalhes.classList.contains('active')) {
+            trocarTela(telaDetalhes, telaCards);
+        } else if (telaCards.classList.contains('active')) {
+            trocarTela(telaCards, telaHero);
+        }
+    }
+});
 
 // Ação 4: Botões 'Ver Detalhes' nos Cards
 cardsWrapper.addEventListener('click', (e) => {
