@@ -46,6 +46,13 @@ start index.html
 # Se estiver no macOS/Linux
 open index.html
 ```
+
+### Acessar pelo GitHub Pages
+
+A aplicação também está publicada no GitHub Pages:
+
+https://devpedrogo.github.io/twd_project/
+
 ⚙️ Estrutura de Arquivos
 A estrutura do projeto é simples e clara:
 ```
